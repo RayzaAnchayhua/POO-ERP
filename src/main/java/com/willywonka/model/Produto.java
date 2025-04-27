@@ -1,15 +1,19 @@
-package com.willywonka.producao.model;
+package com.willywonka.model;
 
-import jakarta.persistence.Entity;
+
 import lombok.Getter;
 import lombok.Setter;
 
-// Entidade Produto
-@Getter
 @Setter
-@Entity
-public class Produto extends EntidadeBase {
+@Getter
+public class Produto {
 
+    // Getters e Setters
+    private Long id;
     private String nome;
     private Double preco;
+    private String descricao;
+
+
+    public Produto(String nome, Double preco) {}
 }

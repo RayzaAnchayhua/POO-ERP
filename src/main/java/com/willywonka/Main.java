@@ -5,62 +5,36 @@ import com.willywonka.model.Produto;
 import com.willywonka.service.FornecedorService;
 import com.willywonka.service.ProdutoService;
 
-
 import java.util.List;
 
-@SpringBootApplication
-public class ErpApplication implements CommandLineRunner {
-
-	@Autowired
-	private FornecedorService fornecedorService;
-
-	@Autowired
-	private ProdutoService produtoService;
-
+public class Main {
 	public static void main(String[] args) {
-		SpringApplication.run(ErpApplication.class, args);
-	}
+		// Criando instâncias dos serviços
+		FornecedorService fornecedorService = new FornecedorService();
+		ProdutoService produtoService = new ProdutoService();
 
-	@Override
-	public void run(String... args) throws Exception {
-		// Adicionando Fornecedores de exemplo
-		Fornecedor fornecedor1 = new Fornecedor();
-		fornecedor1.setNome("Fornecedor A");
-		fornecedor1.setCnpj("12345678000199");
-		fornecedor1.setEndereco("Rua 1, 100");
-		fornecedor1.setTelefone("11123456789");
-
-		Fornecedor fornecedor2 = new Fornecedor();
-		fornecedor2.setNome("Fornecedor B");
-		fornecedor2.setCnpj("98765432000199");
-		fornecedor2.setEndereco("Rua 2, 200");
-		fornecedor2.setTelefone("11987654321");
+		// Criando e adicionando fornecedores
+		Fornecedor fornecedor1 = new Fornecedor("Fornecedor A", "123456789", "Rua XYZ", "11999999999");
+		Fornecedor fornecedor2 = new Fornecedor("Fornecedor B", "987654321", "Rua ABC", "11888888888");
 
 		fornecedorService.salvar(fornecedor1);
 		fornecedorService.salvar(fornecedor2);
 
-		// Adicionando Produtos de exemplo
-		Produto produto1 = new Produto();
-		produto1.setNome("Chocolate");
-		produto1.setPreco(15.99);
-		produto1.setDescricao("Chocolate ao leite");
+		// Listando fornecedores
+		System.out.println("Lista de Fornecedores:");
+		List<Fornecedor> fornecedores = fornecedorService.listar();
+		fornecedores.forEach(System.out::println);
 
-		Produto produto2 = new Produto();
-		produto2.setNome("Bala");
-		produto2.setPreco(5.99);
-		produto2.setDescricao("Bala de frutas");
+		// Criando e adicionando produtos
+		Produto produto1 = new Produto("Produto A", 10.5);
+		Produto produto2 = new Produto("Produto B", 15.0);
 
 		produtoService.salvar(produto1);
 		produtoService.salvar(produto2);
 
-		// Exibindo Fornecedores
-		System.out.println("Lista de Fornecedores:");
-		List<Fornecedor> fornecedores = fornecedorService.listar();
-		fornecedores.forEach(fornecedor -> System.out.println(fornecedor.getNome()));
-
-		// Exibindo Produtos
+		// Listando produtos
 		System.out.println("\nLista de Produtos:");
 		List<Produto> produtos = produtoService.listar();
-		produtos.forEach(produto -> System.out.println(produto.getNome() + " - " + produto.getPreco()));
+		produtos.forEach(System.out::println);
 	}
 }
