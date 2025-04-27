@@ -4,12 +4,12 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
-// Entidade Produto
+// Entidade MateriaPrima
 @Getter
 @Setter
 @Entity
-public class Produto extends EntidadeBase {
+public class MateriaPrima extends EntidadeBase {
 
     private String nome;
-    private Double preco;
+    private String unidadeMedida; // Ex: kg, litro, metro
 }

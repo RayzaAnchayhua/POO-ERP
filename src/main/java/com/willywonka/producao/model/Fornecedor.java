@@ -1,4 +1,3 @@
-
 package com.willywonka.producao.model;
 
 import jakarta.persistence.Entity;

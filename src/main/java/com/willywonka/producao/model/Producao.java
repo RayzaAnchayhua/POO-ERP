@@ -4,11 +4,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.List;
+
+// Entidade Producao
 @Getter
 @Setter
-@MappedSuperclass  // Indica que é uma superclasse para JPA
-public abstract class Producao {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Entity
+public class Producao extends EntidadeBase {
+
+    private LocalDate dataProducao;
+
+    @ManyToOne
+    private Produto produto;
+
+    @ElementCollection
+    private List<ItemProducao> itens;
 }
