@@ -1,38 +1,36 @@
 package com.willywonka.service;
 
-import com.willywonka.model.Fornecedor;
+import com.willywonka.producao.model.Fornecedor;
+import com.willywonka.repository.FornecedorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+// Serviço para Fornecedor
+@Service
+public class FornecedorService implements GenericService<Fornecedor> {
 
-public class FornecedorService {
+    @Autowired
+    private FornecedorRepository repository;
 
-    private final List<Fornecedor> fornecedores = new ArrayList<>();
-    private Long currentId = 1L;
-
-    // Listar todos os fornecedores
+    @Override
     public List<Fornecedor> listar() {
-        return fornecedores;
+        return repository.findAll();
     }
 
-    // Salvar um novo fornecedor
-    public void salvar(Fornecedor fornecedor) {
-        fornecedor.setId(currentId++);
-        fornecedores.add(fornecedor);
+    @Override
+    public Fornecedor salvar(Fornecedor fornecedor) {
+        return repository.save(fornecedor);
     }
 
-    // Excluir um fornecedor
+    @Override
     public void excluir(Long id) {
-        fornecedores.removeIf(fornecedor -> fornecedor.getId().equals(id));
+        repository.deleteById(id);
     }
 
-    // Buscar um fornecedor pelo ID
+    @Override
     public Fornecedor buscarPorId(Long id) {
-        Optional<Fornecedor> fornecedor = fornecedores.stream()
-                .filter(f -> f.getId().equals(id))
-                .findFirst();
-        return fornecedor.orElse(null);
+        return repository.findById(id).orElse(null);
     }
 }

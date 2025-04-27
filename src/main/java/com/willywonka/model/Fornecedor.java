@@ -1,20 +1,15 @@
-package com.willywonka.model;
+package com.willywonka.producao.model;
 
+import jakarta.persistence.Entity;
+import lombok.*;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
 @Getter
-public class Fornecedor {
-
-    // Getters e Setters
-    private Long id;
+@Setter
+@Entity
+public class Fornecedor extends EntidadeBase {
     private String nome;
     private String cnpj;
     private String endereco;
     private String telefone;
-
-    public Fornecedor() {}
-    public Fornecedor(String nome, String cnpj, String endereco, String telefone) {}
 }
+
