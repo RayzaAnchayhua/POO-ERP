@@ -50,3 +50,4 @@ Sistema ERP (Enterprise Resource Planning) simplificado que demonstra:
 Este projeto está sob a licença MIT.  
 
 ---  
+"# POO-ERP-LITE" 
